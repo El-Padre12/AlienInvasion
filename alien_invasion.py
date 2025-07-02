@@ -1,5 +1,5 @@
-import sys
-import pygame
+import sys # used to make the game exit when the player quits
+import pygame # functionality needed to make a game
 
 from settings import Settings
 from ship import Ship
@@ -9,28 +9,35 @@ class AlienInvasion:
 
     def __init__(self):
         """inits the game and game-resources"""
-
         pygame.init()
+
+        # assigning objects to attributes
+        # the object assigned to 'self.screen' is a 'surface' in PyGame which represents an entire game window
+        # a surface in Pygame is a part of the screen where a game element can be displayed
+        # elements in the game such as 'alien' or 'ship' are surfaces
         self.clock = pygame.time.Clock()
         self.settings = Settings()        
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Free My Boy E.T. 2025")
         self.ship = Ship(self)
-
-        # background color
-        self.bg_color = (0, 0, 0)
     
     def run_game(self):
         """main loop for the game"""
 
+        #event loop and code that manages screen updates
         while True:
             self._check_events()
             self._update_screen()
-            self.clock.tick(60)
-        
+            self.clock.tick(60) # frame rate
+            self.screen.fill(self.settings.bg_color)
+
+    # helper methods do work inside a class but aren't meant to be used by code outside the class
+    # in Python a single leading underscore indicates a helper method
     def _check_events(self):
-        # watches for keyboard/mouse input
+        # watches for keyboard/mouse input from the user AKA 'events'
             for event in pygame.event.get():
+
+                # clicking the close window button will exit game
                 if event.type == pygame.QUIT:
                     sys.exit()
     
@@ -44,7 +51,7 @@ class AlienInvasion:
         pygame.display.flip()
 
 if __name__ == '__main__':
-    # init game instance, and run game
+    # init game instance, and run game only if the file is called directly
 
     ai = AlienInvasion()
     ai.run_game()
