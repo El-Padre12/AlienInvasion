@@ -41,7 +41,7 @@ class AlienInvasion:
                 # clicking the close window button will exit game
                 if event.type == pygame.QUIT:
                     sys.exit()
-                # 
+                # handles ship movement
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
                         self.ship.moving_right = True
