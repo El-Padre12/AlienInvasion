@@ -27,6 +27,7 @@ class AlienInvasion:
         #event loop and code that manages screen updates
         while True:
             self._check_events()
+            self.ship.update()
             self._update_screen()
             self.clock.tick(60) # frame rate
             self.screen.fill(self.settings.bg_color)
@@ -40,6 +41,10 @@ class AlienInvasion:
                 # clicking the close window button will exit game
                 if event.type == pygame.QUIT:
                     sys.exit()
+                elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = True
+                elif event.type == pygame.KEYUP and event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
     
     def _update_screen(self):
         """updates images on the screen and flip to the new screen"""

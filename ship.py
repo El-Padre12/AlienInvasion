@@ -15,6 +15,15 @@ class Ship:
 
         # starts each ship at the bottom middle of the screen
         self.rect.midbottom = self.screen_rect.midbottom
+
+        # movement flag set to false; game starts with a motionless ship
+        self.moving_right = False
+    
+    def update(self):
+        """updates the ships position based on the movement Flag"""
+
+        if self.moving_right:
+            self.rect.x += 1
     
     def blitme(self):
         """draw the ship at its current location"""
