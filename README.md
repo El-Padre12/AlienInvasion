@@ -1,4 +1,4 @@
-# Alien Invasion
+# Alien Invasion(Currently in Early Stages of Development)
 
 My take on a classic arcade-style space shooter game built with Python and Pygame, following the project from **Python Crash Course (3rd Edition)** by Eric Matthes.
 
@@ -6,7 +6,7 @@ My take on a classic arcade-style space shooter game built with Python and Pygam
 
 Space Invaders is a 2D side-scrolling shooter where you control a spaceship defending Earth from waves of invading aliens. The game demonstrates fundamental game development concepts including sprite collision detection, game states, scoring systems, and progressive difficulty scaling.
 
-## Features
+## Features(Once Completed)
 
 - **Player Controls**: Smooth ship movement with keyboard input
 - **Dynamic Shooting**: Fire bullets to destroy alien invaders
