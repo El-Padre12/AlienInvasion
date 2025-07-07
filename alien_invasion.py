@@ -3,6 +3,7 @@ import pygame # functionality needed to make a game
 
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 class AlienInvasion:
     """class for game assets and behavior"""
@@ -22,6 +23,7 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Free My Boy E.T. 2025")
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
     
     def run_game(self):
         """main loop for the game"""
@@ -30,6 +32,7 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
             self.clock.tick(60) # frame rate
             self.screen.fill(self.settings.bg_color)
