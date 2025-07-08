@@ -33,6 +33,12 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.bullets.update()
+
+            # gets rid of bullets from memory when they "disapear" off the screen.
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+
             self._update_screen()
             self.clock.tick(60) # frame rate
             self.screen.fill(self.settings.bg_color)
