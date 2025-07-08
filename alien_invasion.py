@@ -80,9 +80,9 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """creates and adds new bullet to bullets group"""
-
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _update_screen(self):
         """updates images on the screen and flip to the new screen"""
