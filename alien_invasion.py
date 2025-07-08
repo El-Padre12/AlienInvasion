@@ -31,15 +31,13 @@ class AlienInvasion:
         #event loop and code that manages screen updates
         while True:
             self._check_events()
+            
             self.ship.update()
             self.bullets.update()
-
-            # gets rid of bullets from memory when they "disapear" off the screen.
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-
+            
+            self._update_bullets()
             self._update_screen()
+            
             self.clock.tick(60) # frame rate
             self.screen.fill(self.settings.bg_color)
 
@@ -83,6 +81,16 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+            """gets rid of bullets from memory when they "disapear" off the screen."""
+
+            # updates bullet position
+            self.bullets.update()
+
+            for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
 
     def _update_screen(self):
         """updates images on the screen and flip to the new screen"""
