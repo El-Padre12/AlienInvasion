@@ -18,7 +18,7 @@ class AlienInvasion:
         # elements in the game such as 'alien' or 'ship' are surfaces
         self.clock = pygame.time.Clock()
         self.settings = Settings()        
-        self.screen = pygame.display.set_mode((1600,900)) # prefer this size over fullscreen
+        self.screen = pygame.display.set_mode((1400,900)) # prefer this size over fullscreen
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Free My Boy E.T. 2025")
@@ -39,7 +39,7 @@ class AlienInvasion:
             self._update_screen()
             
             self.clock.tick(60) # frame rate
-            self.screen.fill(self.settings.bg_color)
+            # self.screen.fill(self.settings.bg_color)
 
     # helper methods do work inside a class but aren't meant to be used by code outside the class
     # in Python a single leading underscore indicates a helper method
@@ -95,7 +95,8 @@ class AlienInvasion:
     def _update_screen(self):
         """updates images on the screen and flip to the new screen"""
         
-        self.screen.fill(self.settings.bg_color)
+        # self.screen.fill(self.settings.bg_color)
+        self.screen.blit(self.settings.bg_image, (0,0))
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.ship.blitme()
