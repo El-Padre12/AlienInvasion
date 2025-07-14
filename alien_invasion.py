@@ -40,6 +40,7 @@ class AlienInvasion:
             self.bullets.update()
             
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
             
             self.clock.tick(60) # frame rate
@@ -96,6 +97,11 @@ class AlienInvasion:
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
 
+    def _update_aliens(self):
+        """updates all the aliens"""
+
+        self.aliens.update()
+
     def _create_fleet(self):
         """creates alien fleet"""
 
@@ -129,8 +135,10 @@ class AlienInvasion:
         
         # self.screen.fill(self.settings.bg_color)
         self.screen.blit(self.settings.bg_image, (0,0))
+        
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+
         self.ship.blitme()
         self.aliens.draw(self.screen)
             
