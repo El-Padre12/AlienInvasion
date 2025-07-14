@@ -98,8 +98,9 @@ class AlienInvasion:
                     self.bullets.remove(bullet)
 
     def _update_aliens(self):
-        """updates all the aliens"""
+        """checks to see if fleet is at the edge, then updates postion"""
 
+        self._check_fleet_edges()
         self.aliens.update()
 
     def _create_fleet(self):
@@ -130,12 +131,27 @@ class AlienInvasion:
         new_alien.rect.y = y_pos
         self.aliens.add(new_alien)
 
+    def _check_fleet_edges(self):
+        """response/action to any alien reaching the edge"""
+
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+    
+    def _change_fleet_direction(self):
+        """drops entire fleet and changes fleet direction"""
+
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+
     def _update_screen(self):
         """updates images on the screen and flip to the new screen"""
         
         # self.screen.fill(self.settings.bg_color)
         self.screen.blit(self.settings.bg_image, (0,0))
-        
+
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
 
