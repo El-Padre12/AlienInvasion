@@ -16,15 +16,15 @@ class Settings:
         self.bg_image = pygame.transform.scale(self.bg_image, (1400, 900))  # Scale to screen size
 
         # ship settings
-        self.ship_speed = 4.8
+        self.ship_speed = 5.8
 
         # alien settings
-        self.alien_speed = 1.0
+        self.alien_speed = 1.9
         self.fleet_drop_speed = 10
         self.fleet_direction = 1    # 1 = fleet direction to the right; -1 = to the left
 
         # bullet settings
-        self.bullet_speed = 5.0
+        self.bullet_speed = 6.0
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (230, 230, 230)
