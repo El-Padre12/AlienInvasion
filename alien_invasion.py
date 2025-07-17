@@ -1,7 +1,10 @@
 import sys # used to make the game exit when the player quits
+from time import sleep # used to pause game for a moment when ship is hit
+
 import pygame # functionality needed to make a game
 
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
@@ -23,6 +26,9 @@ class AlienInvasion:
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Free My Boy E.T. 2025")
+
+        self.stats = GameStats(self)
+
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
@@ -115,6 +121,9 @@ class AlienInvasion:
         self._check_fleet_edges()
         self.aliens.update()
 
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            self._ship_hit()
+
     def _create_fleet(self):
         """creates alien fleet"""
 
@@ -157,6 +166,23 @@ class AlienInvasion:
         for alien in self.aliens.sprites():
             alien.rect.y += self.settings.fleet_drop_speed
         self.settings.fleet_direction *= -1
+
+    def _ship_hit(self):
+        """responds to a ship colliding with an alien"""
+
+        # decrements ships left
+        self.stats.ships_left -= 1
+
+        # empties any remaining bullets and aliens
+        self.bullets.empty()
+        self.aliens.empty()
+
+        # create new fleet and center the new ship
+        self._create_fleet()
+        self.ship.center_ship()
+
+        # pause
+        sleep(0.5)
 
     def _update_screen(self):
         """updates images on the screen and flip to the new screen"""
