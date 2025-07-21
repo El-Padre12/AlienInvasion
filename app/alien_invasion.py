@@ -45,13 +45,13 @@ class AlienInvasion:
         while True:
             self._check_events()
             
-            self.ship.update()
-            self.bullets.update()
+            if self.game_active:
+                self.ship.update()
+                self.bullets.update()
+                self._update_bullets()
+                self._update_aliens()
             
-            self._update_bullets()
-            self._update_aliens()
             self._update_screen()
-            
             self.clock.tick(60) # frame rate
             # self.screen.fill(self.settings.bg_color)
 
