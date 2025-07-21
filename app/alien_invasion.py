@@ -25,7 +25,7 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode((1400,900)) # prefer this size over fullscreen
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
-        pygame.display.set_caption("Free My Boy E.T. 2025")
+        pygame.display.set_caption("Free My Boy E.T. - © 2025 an Angel N Chavez Production")
 
         self.stats = GameStats(self)
 
@@ -123,6 +123,17 @@ class AlienInvasion:
 
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
             self._ship_hit()
+        
+        # look for aliens reaching the bottom of the screen
+        self._check_aliens_bottom()
+
+    def _check_aliens_bottom(self):
+        """check if any aliens have reached the bottom of the screen."""
+
+        for alien in self.aliens.sprites():
+            if alien.rect.bottom >= self.settings.screen_height:
+                self._ship_hit()
+                break
 
     def _create_fleet(self):
         """creates alien fleet"""
