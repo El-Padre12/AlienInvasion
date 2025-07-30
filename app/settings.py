@@ -32,7 +32,7 @@ class Settings:
         self.bullets_allowed = 3
 
         # how quickly the game speeds up
-        self.speedup_scale = 1.3
+        self.speedup_scale = 1.2
 
         self.initialize_dynamic_settings()
     
