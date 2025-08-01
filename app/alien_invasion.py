@@ -5,6 +5,7 @@ import pygame # functionality needed to make a game
 
 from settings import Settings
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button
 from ship import Ship
 from bullet import Bullet
@@ -28,7 +29,10 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Free My Boy E.T. - © 2025 an Angel N Chavez Production")
 
+        # create an instance to store game statistics,
+        # and create a scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
@@ -251,6 +255,9 @@ class AlienInvasion:
 
         self.ship.blitme()
         self.aliens.draw(self.screen)
+
+        # draw the score info
+        self.sb.show_score()
 
         # draw the play button if game is inacive
         if not self.game_active:
