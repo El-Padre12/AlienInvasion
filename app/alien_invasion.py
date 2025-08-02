@@ -91,6 +91,9 @@ class AlienInvasion:
             self._start_game()     
 
     def _start_game(self):
+        # reset the game settings
+        self.settings.initialize_dynamic_settings()
+
         # reset game stats
         self.stats.reset_stats()
 
