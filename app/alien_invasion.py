@@ -29,8 +29,7 @@ class AlienInvasion:
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Free My Boy E.T. - © 2025 an Angel N Chavez Production")
 
-        # create an instance to store game statistics,
-        # and create a scoreboard
+        # create an instance to store game statistics, and create a scoreboard
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
 
@@ -87,7 +86,6 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
 
         if button_clicked and not self.game_active:
-            self.settings.initialize_dynamic_settings()     # reset the game settings
             self._start_game()     
 
     def _start_game(self):
