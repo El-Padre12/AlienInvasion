@@ -86,7 +86,8 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
 
         if button_clicked and not self.game_active:
-            self._start_game()     
+            self._start_game()
+            self.sb.prep_score()     
 
     def _start_game(self):
         # reset the game settings
@@ -155,6 +156,12 @@ class AlienInvasion:
 
             # check for any bullets that hit an alien, and get rid of alien and bullet if true
             collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+            # get points for each individual alien killed, even if 2 aliens are killed by 1 bullet
+            if collisions:
+                for aliens in collisions.values():
+                    self.stats.score += self.settings.alien_points * len(aliens)
+                self.sb.prep_score()
 
             if not self.aliens:
                 self.bullets.empty()

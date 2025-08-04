@@ -21,10 +21,14 @@ class Scoreboard:
     def prep_score(self):
         """renders image of the score"""
 
-        score_str = str(self.stats.score)
+        # round score to nearest 10 and format with commas for readability
+        rounded_score = round(self.stats.score, -1)
+        score_str = f'{rounded_score:,}'
+
+        # render the score string as an image using the specified font and text color
         self.score_image = self.font.render(score_str, True, self.text_color) #, self.settings.bg_color)
         
-        #display score at the top right of the screen
+        # display score at the top right of the screen
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
         self.score_rect.top = 20
