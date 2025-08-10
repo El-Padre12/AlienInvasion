@@ -88,6 +88,7 @@ class AlienInvasion:
         if button_clicked and not self.game_active:
             self._start_game()
             self.sb.prep_score()
+            self.sb.prep_level()
 
     def _start_game(self):
         # reset the game settings
@@ -168,6 +169,10 @@ class AlienInvasion:
                 self.bullets.empty()
                 self._create_fleet()
                 self.settings.increase_speed()
+
+                # increase level
+                self.stats.level += 1
+                self.sb.prep_level()
 
     def _update_aliens(self):
         """checks to see if fleet is at the edge, then updates postion"""
