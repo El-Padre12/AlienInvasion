@@ -74,22 +74,57 @@ python alien_invasion.py
 | P | Start new game |
 | Q | Quit game |
 
+## Running Alien Invasion with Docker
+
+You can run this game in a Docker container on Linux.
+
+### Run the game
+
+```bash
+xhost +local:docker
+
+docker run -it --rm \
+-e DISPLAY=$DISPLAY \
+-v /tmp/.X11-unix:/tmp/.X11-unix \itanc12/free-et
+```
+
+- The `xhost +local:docker` command allows Docker containers to access your display.
+- The `-e DISPLAY` and `-v /tmp/.X11-unix:/tmp/.X11-unix` options let the container open the game window on your desktop.
+
+#### Optional: Use a helper script
+
+For convenience, you can create a `run.sh` script with the above commands and run:
+
+```bash
+./run.sh
+```
+
+> **Note:** Running GUI apps in Docker on Windows or Mac requires extra setup (like XQuartz or VcXsrv). For most users on those platforms, running the game natively is easier.
+
 ## Project Structure
 
 ```
-alien_invasion/
-├── alien_invasion.py      # Main game file
-├── settings.py           # Game configuration
-├── ship.py              # Player ship class
-├── bullet.py            # Bullet mechanics
-├── alien.py             # Alien enemy class
-├── game_stats.py        # Score and game state tracking
-├── scoreboard.py        # Score display management
-├── button.py            # UI button implementation
-├── high_score.json      # Persistent high score storage
-└── images/              # Game sprites and graphics
-    ├── ship.bmp
-    └── alien.bmp
+AlienInvasion/
+├── app/
+│   ├── alien_invasion.py   # Main game file
+│   ├── settings.py         # Game configuration
+│   ├── ship.py             # Player ship class
+│   ├── bullet.py           # Bullet mechanics
+│   ├── alien.py            # Alien enemy class
+│   ├── game_stats.py       # Score and game state tracking
+│   ├── scoreboard.py       # Score display management
+│   └── button.py           # UI button implementation
+│
+├── images/                 # Game sprites and graphics
+│   ├── boss_ufo.png
+│   ├── shuttle2.png
+│   ├── space1.jpg
+│   ├── ufo1.png
+│   └── ufo3.png
+├── Dockerfile              # Docker build instructions
+├── requirements.txt        # Python dependencies
+├── .dockerignore           # Docker ignore rules
+└── README.md               # Project documentation
 ```
 
 ## Learning Objectives
@@ -116,3 +151,7 @@ This project teaches essential programming concepts including:
 ## Credits
 
 Based on the Alien Invasion project from **Python Crash Course (3rd Edition)** by Eric Matthes, published by No Starch Press. This project serves as an my introduction to game development with Python and demonstrates practical applications of programming fundamentals in an engaging, interactive way.
+
+## Demo
+
+![Gameplay Demo](images/demo.gif)
