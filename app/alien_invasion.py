@@ -87,7 +87,7 @@ class AlienInvasion:
 
         if button_clicked and not self.game_active:
             self._start_game()
-            self.sb.prep_score()     
+            self.sb.prep_score()
 
     def _start_game(self):
         # reset the game settings
@@ -162,6 +162,7 @@ class AlienInvasion:
                 for aliens in collisions.values():
                     self.stats.score += self.settings.alien_points * len(aliens)
                 self.sb.prep_score()
+                self.sb.check_high_score()
 
             if not self.aliens:
                 self.bullets.empty()
