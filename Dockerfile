@@ -1,20 +1,28 @@
-FROM python:alpine
+FROM python:3.12-alpine
 
-# Install system dependencies for pygame and X11
-RUN apt-get update && \
-    apt-get install -y python3-dev libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
-    libsm6 libxext6 libxrender-dev libgl1 x11-apps && \
-    rm -rf /var/lib/apt/lists/*
+# Install build tools and dependencies
+RUN apk update && apk add --no-cache \
+    python3-dev \
+    gcc \
+    musl-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libpng-dev \
+    sdl2-dev \
+    sdl2_image-dev \
+    sdl2_mixer-dev \
+    sdl2_ttf-dev \
+    bash
 
-# Set work directory
+# Set working directory
 WORKDIR /app
 
-# Copy project files
+# Copy your source files
 COPY app/ ./app/
 COPY images/ ./images/
 
-# Install Python dependencies
+# Install pygame (build from source)
 RUN pip install --no-cache-dir pygame
 
-# Set the entrypoint
+# Run your game
 CMD ["python", "app/alien_invasion.py"]
