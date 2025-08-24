@@ -1,4 +1,4 @@
-FROM python:3-slim
+FROM python:alpine
 
 # Install system dependencies for pygame and X11
 RUN apt-get update && \
